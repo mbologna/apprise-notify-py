@@ -1,0 +1,24 @@
+name: CI
+
+"on":
+  push:
+    branches: ["**"]
+    tags: ["v*.*.*"]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  python:
+    uses: mbologna/.github/.github/workflows/python-ci.yml@34ddd5146432411b41591f745437c16515376361 # main
+    with:
+      python_version: "3.14"
+      use_uv: true
+      enable_codecov: false
+    secrets: inherit
