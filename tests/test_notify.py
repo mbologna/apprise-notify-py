@@ -41,6 +41,14 @@ def test_default_type_is_info(server):
     assert received[0][1]["type"] == "info"
 
 
+def test_format_is_sent_only_when_given(server):
+    url, received, _ = server
+    notify(url, "t", "[a](https://x)", format_="markdown")
+    notify(url, "t", "b")
+    assert received[0][1]["format"] == "markdown"
+    assert "format" not in received[1][1]
+
+
 def test_empty_url_disables(server):
     _, received, _ = server
     assert notify("", "t", "b") is False

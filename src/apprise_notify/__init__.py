@@ -13,10 +13,12 @@ import urllib.request
 __all__ = ["notify"]
 
 
-def notify(apprise_url, title, body, type_="info", timeout=15):
+def notify(apprise_url, title, body, type_="info", timeout=15, format_=None):
     """POST one notification to apprise_url and return whether it was accepted.
 
-    type_ is Apprise's severity: info, success, warning or failure. An empty
+    type_ is Apprise's severity: info, success, warning or failure. format_ is
+    the body's format: text, markdown or html; None leaves it out, so Apprise
+    treats the body as plain text. An empty
     apprise_url disables notifications and returns False. Failures are printed
     to stderr, never raised, so a notification problem can't crash the caller;
     callers that keep "already sent" state should record only what returned
@@ -24,7 +26,10 @@ def notify(apprise_url, title, body, type_="info", timeout=15):
     """
     if not apprise_url:
         return False
-    data = json.dumps({"title": title, "body": body, "type": type_}).encode()
+    payload = {"title": title, "body": body, "type": type_}
+    if format_:
+        payload["format"] = format_
+    data = json.dumps(payload).encode()
     req = urllib.request.Request(apprise_url, data=data, headers={"Content-Type": "application/json"})
     try:
         with urllib.request.urlopen(req, timeout=timeout):

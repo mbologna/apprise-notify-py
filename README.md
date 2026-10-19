@@ -13,9 +13,11 @@ if not notify("http://apprise:8000/notify/alerts", "Backup failed", "restic exit
     ...  # not delivered: don't record it as sent
 ```
 
-`notify(apprise_url, title, body, type_="info", timeout=15)` POSTs
-`{"title", "body", "type"}` as JSON and returns whether the server accepted it.
-`type_` is Apprise's severity: `info`, `success`, `warning` or `failure`. An
+`notify(apprise_url, title, body, type_="info", timeout=15, format_=None)`
+POSTs `{"title", "body", "type"}` as JSON and returns whether the server
+accepted it. `type_` is Apprise's severity: `info`, `success`, `warning` or
+`failure`. `format_` (`text`, `markdown` or `html`) adds Apprise's `format`
+field, for example to send links; left out, the body is plain text. An
 empty URL turns notifications off and returns `False`. Errors are printed to
 stderr and never raised, so a notification problem can't crash the caller.
 
@@ -25,9 +27,9 @@ Pin a release tag:
 
 ```toml
 # pyproject.toml
-dependencies = ["apprise-notify @ git+https://github.com/mbologna/apprise-notify-py@v1.0.0"]
+dependencies = ["apprise-notify @ git+https://github.com/mbologna/apprise-notify-py@v1.1.0"]
 ```
 
 ```sh
-pip install "apprise-notify @ git+https://github.com/mbologna/apprise-notify-py@v1.0.0"
+pip install "apprise-notify @ git+https://github.com/mbologna/apprise-notify-py@v1.1.0"
 ```
