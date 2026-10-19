@@ -62,6 +62,13 @@ def test_http_error_returns_false(server, capsys):
     assert "notify failed for 't'" in capsys.readouterr().err
 
 
+def test_key_without_configuration_returns_false(server, capsys):
+    url, _, status = server
+    status["code"] = 204
+    assert notify(url, "t", "b") is False
+    assert "no Apprise configuration" in capsys.readouterr().err
+
+
 def test_unreachable_returns_false(capsys):
     assert notify("http://127.0.0.1:9/notify/x", "t", "b", timeout=2) is False
     assert "notify failed" in capsys.readouterr().err
