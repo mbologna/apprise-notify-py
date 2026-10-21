@@ -34,3 +34,12 @@ dependencies = ["apprise-notify @ git+https://github.com/mbologna/apprise-notify
 ```sh
 pip install "apprise-notify @ git+https://github.com/mbologna/apprise-notify-py@v1.1.1"
 ```
+
+## Development
+
+`uv.lock` only takes releases at least 7 days old (`exclude-newer` in
+`pyproject.toml`), so a freshly published, compromised package can't land in
+the lock. A CVE fix released less than 7 days ago needs a temporary
+`exclude-newer-package = { <package> = false }` override in `[tool.uv]`
+followed by `uv lock --upgrade-package <package>`; drop the override once
+the release is a week old.

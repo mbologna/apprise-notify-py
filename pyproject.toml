@@ -28,3 +28,7 @@ addopts = "-v --strict-markers"
 
 [tool.coverage.run]
 source = ["apprise_notify"]
+
+[tool.uv]
+required-version = ">=0.12.12"
+exclude-newer = "7 days"
