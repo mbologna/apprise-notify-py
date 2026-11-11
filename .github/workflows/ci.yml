@@ -20,7 +20,7 @@ permissions:
 
 jobs:
   python:
-    uses: mbologna/.github/.github/workflows/python-ci.yml@581748d588a3d2a57a48d564a22b5cc4901d58c1 # main
+    uses: mbologna/.github/.github/workflows/python-ci.yml@717c3959205c8ddcab484d5f92ffccc05352f434 # main
     with:
       python_version: "3.14"
       use_uv: true
@@ -41,7 +41,7 @@ jobs:
     # contents: push the tag and create the Release.
     permissions:
       contents: write
-    uses: mbologna/.github/.github/workflows/auto-release.yml@581748d588a3d2a57a48d564a22b5cc4901d58c1 # main
+    uses: mbologna/.github/.github/workflows/auto-release.yml@717c3959205c8ddcab484d5f92ffccc05352f434 # main
     with:
       strategy: conventional
       dispatch_tag_build: false
