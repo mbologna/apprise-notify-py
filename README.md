@@ -24,16 +24,32 @@ stderr and never raised, so a notification problem can't crash the caller.
 
 ## Install
 
-Pin a release tag:
+From PyPI (1.2.0 and later):
+
+```sh
+pip install apprise-notify
+```
 
 ```toml
 # pyproject.toml
+dependencies = ["apprise-notify>=1.2"]
+```
+
+Release tags keep working for callers that pin one:
+
+```toml
 dependencies = ["apprise-notify @ git+https://github.com/mbologna/apprise-notify-py@v1.1.1"]
 ```
 
-```sh
-pip install "apprise-notify @ git+https://github.com/mbologna/apprise-notify-py@v1.1.1"
-```
+## Releases
+
+[auto-release](https://github.com/mbologna/auto-release) tags each release
+from the Conventional Commits on `main` (Monday's scheduled CI run, or a
+manual run) and starts `publish.yml` on the new tag. That workflow builds the
+package with the tag's version and uploads it to PyPI through
+[Trusted Publishing](https://docs.pypi.org/trusted-publishers/): no PyPI
+token is stored in the repository. The version in `pyproject.toml` is not
+bumped by the release.
 
 ## Development
 
