@@ -20,7 +20,7 @@ permissions:
 
 jobs:
   python:
-    uses: mbologna/.github/.github/workflows/python-ci.yml@ee5bcf8cd73154eaccd48e386919f73d2dd832e2 # main
+    uses: mbologna/.github/.github/workflows/python-ci.yml@0526d7e5eb36426d31732e97b20e6e275c1ad4f3 # main
     with:
       python_version: "3.15"
       enable_codecov: false
@@ -34,7 +34,7 @@ jobs:
     permissions:
       contents: write
       actions: write
-    uses: mbologna/.github/.github/workflows/auto-release.yml@ee5bcf8cd73154eaccd48e386919f73d2dd832e2 # main
+    uses: mbologna/.github/.github/workflows/auto-release.yml@0526d7e5eb36426d31732e97b20e6e275c1ad4f3 # main
     with:
       strategy: conventional
       dispatch_workflow: publish.yml
