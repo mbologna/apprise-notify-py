@@ -28,12 +28,14 @@ jobs:
 
   auto-release:
     needs: [python]
-    # contents: push the tag and create the Release.
+    # contents: push the tag and create the Release; actions: start the PyPI
+    # publish on it. A tag pushed with GITHUB_TOKEN triggers no `push` run,
+    # so publish.yml is dispatched on the tag instead.
     permissions:
       contents: write
+      actions: write
     uses: mbologna/.github/.github/workflows/auto-release.yml@ee5bcf8cd73154eaccd48e386919f73d2dd832e2 # main
     with:
       strategy: conventional
-      # Consumers install a tag and nothing builds on one: no tag build.
-      dispatch_tag_build: false
+      dispatch_workflow: publish.yml
     secrets: inherit
