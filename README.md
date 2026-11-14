@@ -22,6 +22,46 @@ field, for example to send links; left out, the body is plain text. An
 empty URL turns notifications off and returns `False`. Errors are printed to
 stderr and never raised, so a notification problem can't crash the caller.
 
+## Several Apprise servers
+
+`apprise_url` can also name several servers, in order of preference: a list,
+or one string with the URLs separated by spaces (handy for a single
+environment variable).
+
+```python
+notify(
+    ["http://apprise.local:8000/notify/alerts", "https://apprise.example.org/notify/alerts"],
+    "Backup failed",
+    "restic exited 1",
+    "failure",
+)
+```
+
+The URLs are tried in order and the first one that delivers wins; the rest
+are not called. This is a failover, not a fan-out, so two servers that share
+the same Telegram bot don't send the message twice.
+
+| Answer from a URL | What happens |
+| --- | --- |
+| 2xx (not 204) | delivered: return `True` |
+| network error, timeout or 5xx | retry that URL once after one second, then move to the next |
+| 4xx, or 204 (no configuration for the key) | move to the next URL at once; a retry wouldn't change the answer |
+
+`notify` returns `False` when no URL delivers. `timeout` applies to each
+attempt, so the worst case is about `2 × timeout` per URL.
+
+Passing `None` reads the URLs from the `APPRISE_URLS` environment variable
+(same space-separated format); an unset or empty variable turns
+notifications off. An empty string still turns them off without looking at
+the environment.
+
+```python
+notify(None, "Backup failed", "restic exited 1", "failure")  # APPRISE_URLS="http://a/notify/k http://b/notify/k"
+```
+
+A single URL behaves as in 1.1.x, except that a network error or 5xx is now
+retried once.
+
 ## Install
 
 From PyPI (1.2.0 and later):
@@ -38,7 +78,7 @@ dependencies = ["apprise-notify>=1.2"]
 Release tags keep working for callers that pin one:
 
 ```toml
-dependencies = ["apprise-notify @ git+https://github.com/mbologna/apprise-notify-py@v1.1.1"]
+dependencies = ["apprise-notify @ git+https://github.com/mbologna/apprise-notify-py@v1.2.0"]
 ```
 
 ## Releases
