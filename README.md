@@ -81,15 +81,18 @@ Release tags keep working for callers that pin one:
 dependencies = ["apprise-notify @ git+https://github.com/mbologna/apprise-notify-py@v1.2.0"]
 ```
 
-## Releases
+## Versioning
 
-[auto-release](https://github.com/mbologna/auto-release) tags each release
-from the Conventional Commits on `main` (Monday's scheduled CI run, or a
-manual run) and starts `publish.yml` on the new tag. That workflow builds the
-package with the tag's version and uploads it to PyPI through
+Releases follow SemVer: [auto-release](https://github.com/mbologna/auto-release)
+tags `vX.Y.Z` from the Conventional Commit types on `main` (`feat` minor;
+`fix`, `perf`, `revert` patch; a breaking change major), on Monday's
+scheduled CI run or a manual run, and starts `publish.yml` on the new tag.
+That workflow builds the package with the tag's version and uploads it to
+PyPI as `X.Y.Z` through
 [Trusted Publishing](https://docs.pypi.org/trusted-publishers/): no PyPI
 token is stored in the repository. The version in `pyproject.toml` is not
-bumped by the release.
+bumped by the release. See the
+[versioning standard](https://github.com/mbologna/.github/blob/main/VERSIONING.md).
 
 ## Development
 
