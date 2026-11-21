@@ -38,7 +38,7 @@ def _post(url, data, title, timeout):
     """POST once. Return "ok", "skip" (don't retry this URL) or "retry"."""
     try:
         req = urllib.request.Request(url, data=data, headers={"Content-Type": "application/json"})
-        with urllib.request.urlopen(req, timeout=timeout) as resp:
+        with urllib.request.urlopen(req, timeout=timeout) as resp:  # nosec B310: the caller's own Apprise URL
             # apprise-api answers 204 when the key has no configuration: the
             # request is "fine", but nothing was sent to anyone.
             if resp.status == 204:

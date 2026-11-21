@@ -1,0 +1,23 @@
+# Copier's record of this project's template answers. Don't edit by hand:
+# `copier update` (or Renovate's copier manager) reads it to apply
+# template changes.
+_commit: v1.5.0
+_src_path: https://github.com/mbologna/python-app-template.git
+author: Michele Bologna
+changelog_releases: true
+codecov: false
+coverage_fail_under: 100
+description: 'Send a notification to an Apprise API server: one function, standard
+    library only'
+forge: github
+kind: package
+license: MIT
+main_module: false
+notifications: false
+owned_files: []
+package_name: apprise_notify
+project_name: apprise-notify
+pypi_publish: true
+python_floor: '3.10'
+sample_code: false
+script_target: ''

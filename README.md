@@ -102,3 +102,8 @@ the lock. A CVE fix released less than 7 days ago needs a temporary
 `exclude-newer-package = { <package> = false }` override in `[tool.uv]`
 followed by `uv lock --upgrade-package <package>`; drop the override once
 the release is a week old.
+
+Local checks run with [pre-commit](https://pre-commit.com/): `uv run
+pre-commit install` once, or `uv run pre-commit run --all-files`. The
+skeleton (CI, pre-commit, `pyproject.toml` tooling) comes from
+[python-app-template](https://github.com/mbologna/python-app-template).
