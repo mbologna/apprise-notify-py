@@ -2,6 +2,13 @@
 
 [![CI](https://github.com/mbologna/apprise-notify-py/actions/workflows/ci.yml/badge.svg)](https://github.com/mbologna/apprise-notify-py/actions/workflows/ci.yml)
 
+> **Archived (2026-11-23):** use the official [apprise](https://github.com/caronc/apprise)
+> library instead. Since apprise 1.11, an Apprise API URL like
+> `apprise://host:8000/<key>?method=json&version=1&retry=1&wait=1&cto=15&rto=15`
+> sends the same JSON to `/notify/<key>`, and priority tags (`1:tag`, `2:tag`) try the
+> URLs in order, which covers this package's failover and retry. The releases on PyPI
+> stay available.
+
 Send a notification to an [Apprise API](https://github.com/caronc/apprise-api)
 server from a small Python script or CronJob. One function, standard library
 only, no dependencies.
